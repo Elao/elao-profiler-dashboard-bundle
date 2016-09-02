@@ -55,3 +55,5 @@ _elao_profiler_dashboard:
     type:     annotation
     prefix:   /_profiler_dashboard
 ```
+
+Go on http://app.domain.dev/app_dev.php/_profiler_dashboard/metrics
