@@ -8,10 +8,20 @@ This bundle compile metrics (request info, performance metrics, db queries, etc.
 
 ### Symfony >= 2.7
 
+Add repository to composer
+```json
+"repositories": [
+    {
+        "url": "https://github.com/Elao/elao-profiler-dashboard-bundle.git",
+        "type": "git"
+    }
+],
+```
+
 Require the bundle in _Composer_:
 
 ```bash
-$ composer require elao/profiler-dashboard-bundle
+$ composer require elao/profiler-dashboard-bundle dev-master@dev
 ```
 
 Install the bundle in your _AppKernel_:
@@ -29,7 +39,7 @@ public function registerBundles()
         $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
 
         // Elao Profiler Dashboard
-        $bundles[] = new Bundles\ElaoProfilerDashboardBundle\ElaoProfilerDashboardBundle();
+        $bundles[] = new Elao\Bundle\ProfilerDashboardBundle\ElaoProfilerDashboardBundle();
     }
 }
 ```
