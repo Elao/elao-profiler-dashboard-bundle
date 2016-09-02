@@ -4,6 +4,8 @@
 
 This bundle compile metrics (request info, performance metrics, db queries, etc.) of last requests (from the Symfony Profiler) into one view.
 
+![example](doc/metrics.png)
+
 ## Installation
 
 ### Symfony >= 2.7
