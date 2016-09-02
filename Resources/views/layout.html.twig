@@ -1,0 +1,11 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block head %}
+    {{ parent() }}
+    
+    <style>
+        .container{ max-width: none; }
+        #sidebar{ display: none;}
+        #collector-content{ margin: 0;}
+    </style>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% block db_headers %}
+    <th scope="col">Database Queries</th>
+    <th scope="col">Query time (<span class="unit">ms</span>)</th>
+    <th scope="col">Invalid entities</th>
+    <th scope="col">Cache hits</th>
+    <th scope="col">Cache misses</th>
+    <th scope="col">Cache puts</th>
+{% endblock %}
+
+{% block db_columns %}
+    {% set path = path('_profiler', {token: profile.token, panel: 'db'}) %}
+    {% set collector = profile.collectors.db %}
+
+    <td class="text-center">
+        <a href="{{ path }}">
+            <span class="label">
+                {{ collector.querycount }}
+            </span>
+        </a>
+    </td>
+    <td class="text-right">
+        <a href="{{ path }}">{{ '%0.2f'|format(collector.time * 1000) }}</a>
+    </td>
+    <td class="text-center">
+        {% if collector.invalidEntityCount %}
+            <a href="{{ path }}">
+                <span class="label {{ collector.invalidEntityCount ? 'status-error' : 'status-success' }}">
+                    {{ collector.invalidEntityCount }}
+                </span>
+            </a>
+        {% endif %}
+    </td>
+    <td class="text-center">
+        {% if collector.cacheHitsCount %}
+            <a href="{{ path }}">{{ collector.cacheHitsCount }}</a>
+        {% endif %}
+    </td>
+    <td class="text-center">
+        {% if collector.cacheMissesCount %}
+            <a href="{{ path }}">
+                <span class="label {{ collector.cacheMissesCount ? 'status-error' : 'status-success' }}">
+                    {{ collector.cacheMissesCount }}
+                </span>
+            </a>
+        {% endif %}
+    </td>
+    <td class="text-center">
+        {% if collector.cachePutsCount %}
+            <a href="{{ path }}">{{ collector.cachePutsCount }}</a>
+        {% endif %}
+    </td>
+{% endblock %}

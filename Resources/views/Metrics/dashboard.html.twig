@@ -1,0 +1,41 @@
+{% extends 'ElaoProfilerDashboardBundle::layout.html.twig' %}
+{% use 'ElaoProfilerDashboardBundle:Metrics:_profile.html.twig' %}
+{% use 'ElaoProfilerDashboardBundle:Metrics:_metrics.html.twig' %}
+{% use 'ElaoProfilerDashboardBundle:Metrics:_db.html.twig' %}
+
+{% block summary %}
+    <div class="status">
+        <div class="container">
+            <h2>Elao Profiler Dashboard</h2>
+        </div>
+    </div>
+{% endblock %}
+
+{% block panel %}
+    <h2>{{ profiles ? profiles|length : 'No' }} results found</h2>
+
+    {% if profiles %}
+        <table id="search-results">
+            <thead>
+                <tr>
+                    {{ block('profile_headers') }}
+                    {{ block('metrics_headers') }}
+                    {{ block('db_headers') }}
+                </tr>
+            </thead>
+            <tbody>
+                {% for profile in profiles %}
+                    <tr>
+                        {{ block('profile_columns') }}
+                        {{ block('metrics_columns') }}
+                        {{ block('db_columns') }}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty">
+            <p>The query returned no result.</p>
+        </div>
+    {% endif %}
+{% endblock %}

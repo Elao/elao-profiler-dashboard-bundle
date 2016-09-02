@@ -1,0 +1,48 @@
+{% block metrics_headers %}
+    <th scope="col">Total execution time (<span class="unit">ms</span>)</th>
+    <th scope="col">Symfony initialization (<span class="unit">ms</span>)</th>
+    <th scope="col">Sub-Requests</th>
+    <th scope="col">Sub-Requests time (<span class="unit">ms</span>)</th>
+    <th scope="col">Peak memory usage (<span class="unit">MB</span>)</th>
+{% endblock %}
+
+{% block metrics_columns %}
+    {% set path = path('_profiler', {token: profile.token, panel: 'time'}) %}
+    {% set collector = profile.collectors.time %}
+
+    <td class="text-right">
+        <a href="{{ path }}">
+            {{ '%.0f'|format(collector.duration) }}
+        </a>
+    </td>
+    <td class="text-right">
+        <a href="{{ path }}">
+            {{ '%.0f'|format(collector.inittime) }}
+        </a>
+    </td>
+    <td class="text-center">
+        {% if profile.children %}
+            <a href="{{ path }}">
+                {{ profile.children|length }}
+            </a>
+        {% endif %}
+    </td>
+    <td class="text-right">
+        {% if profile.children %}
+            {% set subrequests_time = 0 %}
+            {% for child in profile.children %}
+                {% set subrequests_time = subrequests_time + child.getcollector('time').events.__section__.duration %}
+            {% endfor %}
+            <a href="{{ path }}">
+                {{ subrequests_time }}
+            </a>
+        {% endif %}
+    </td>
+    <td class="text-right">
+        {% if profile.collectors.memory %}
+            <a href="{{ path }}">
+                {{ '%.2f'|format(profile.collectors.memory.memory / 1024 / 1024) }}
+            </a>
+        {% endif %}
+    </td>
+{% endblock %}

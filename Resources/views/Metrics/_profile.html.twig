@@ -1,0 +1,25 @@
+{% block profile_headers %}
+    <th scope="col" class="text-center">Status</th>
+    <th scope="col">Method</th>
+    <th scope="col">URL</th>
+{% endblock %}
+
+{% block profile_columns %}
+    {% set statusCode = profile.collectors.request.statusCode|default(null) %}
+    {% set css_class = statusCode|default(0) > 399 ? 'status-error' : statusCode|default(0) > 299 ? 'status-warning' : 'status-success' %}
+
+    <td class="text-center">
+        <span class="label {{ css_class }}">{{ statusCode|default('n/a') }}</span>
+    </td>
+    <td>
+        {{ profile.method }}
+        <br>
+        <a href="{{ path('_profiler', { token: profile.token }) }}">{{ profile.token }}</a>
+    </td>
+    <td class="break-long-words">
+        <span class="nowrap">{{ profile.time|date('d-M-Y') }}</span>
+        <span class="nowrap">{{ profile.time|date('H:i:s') }}</span>
+        <br>
+        {{ profile.url }}
+    </td>
+{% endblock %}

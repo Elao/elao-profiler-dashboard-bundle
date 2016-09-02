@@ -1,0 +1,27 @@
+{
+    "name": "elao/profiler-dashboard-bundle",
+    "type": "symfony-bundle",
+    "description": "This bundle compile metrics of last requests into one view.",
+    "keywords": ["elao", "profiler"],
+    "homepage": "https://github.com/Elao/elao-profiler-dashboard-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Elao",
+            "homepage": "http://www.elao.com"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "~2.7|~3.0",
+        "sensio/framework-extra-bundle": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Elao\\Bundle\\ProfilerDashboarBundle\\": "."
+        }
+    },
+    "extra": {
+        "branch-alias": {
+        }
+    }
+}
